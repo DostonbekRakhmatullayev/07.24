@@ -1,6 +1,6 @@
 import { errorHandler } from "../errors/errorsHandler.js";
 import { read, write } from "../utils/FS.js";
-import { subCategoriesId, subCategoriesPost } from "../validate/validaye.js";
+import { subCategoriesId, subCategoriesPost } from "../validate/validate.js";
 
 const SUBCATEGORIESGETID = async (req, res, next) => {
   const { error, value } = subCategoriesId.validate(req.params);
@@ -44,7 +44,6 @@ const SUBCATEGORIESGETID = async (req, res, next) => {
 };
 
 const SUBCATEGORIESGET = async (req, res, next) => {
-
   const subCategories = await read("subCategories.model.json").catch((error) =>
     next(new errorHandler(error, 500))
   );
@@ -55,13 +54,13 @@ const SUBCATEGORIESGET = async (req, res, next) => {
     e.subCategoryId = e.sub_category_id;
     e.subCategoryName = e.sub_category_name;
     e.products = [];
-    delete e.category_id
+    delete e.category_id;
     delete e.sub_category_id;
     delete e.sub_category_name;
 
     products.map((m) => {
       if (m.sub_category_id == e.subCategoryId && delete m.sub_category_id) {
-        m.productName = m.product_name
+        m.productName = m.product_name;
         delete m.product_name;
         e.products.push(m);
       }

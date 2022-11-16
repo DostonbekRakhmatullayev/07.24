@@ -1,6 +1,6 @@
 import { errorHandler } from "../errors/errorsHandler.js";
 import { read, write } from "../utils/FS.js";
-import { productsPost, productsPut } from "../validate/validaye.js";
+import { productsPost, productsPut } from "../validate/validate.js";
 
 const PRODUCTGET = async (req, res, next) => {
   const products = await read("products.model.json").catch((error) =>

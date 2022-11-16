@@ -1,6 +1,6 @@
 import { errorHandler } from "../errors/errorsHandler.js";
 import { read } from "../utils/FS.js";
-import { adminPost } from "../validate/validaye.js";
+import { adminPost } from "../validate/validate.js";
 import jwt from "../utils/jwt.js";
 import sha256 from "sha256";
 

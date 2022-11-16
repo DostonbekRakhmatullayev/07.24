@@ -1,6 +1,6 @@
 import { errorHandler } from "../errors/errorsHandler.js";
 import { read, write } from "../utils/FS.js";
-import { catigoriesPost, catigoriesPut } from "../validate/validaye.js";
+import { catigoriesPost, catigoriesPut } from "../validate/validate.js";
 
 const GET = async (req, res, next) => {
   const { error, value } = catigoriesPut.validate(req.params);
@@ -44,7 +44,6 @@ const GET = async (req, res, next) => {
 };
 
 const CATEGORIESGET = async (req, res, next) => {
-
   const category = await read("categories.model.json").catch((error) =>
     next(new errorHandler(error, 500))
   );
@@ -71,15 +70,14 @@ const CATEGORIESGET = async (req, res, next) => {
     return e;
   });
 
-  
   const { categoryId, categoryName } = req.query;
-  
+
   const dataFilter = data.filter((e) => {
     const categoryid = categoryId ? e.categoryId == categoryId : true;
     const categoryname = categoryName
-    ? e.categoryName.toLowerCase().includes(categoryName.toLowerCase())
-    : true;
-    
+      ? e.categoryName.toLowerCase().includes(categoryName.toLowerCase())
+      : true;
+
     return categoryid && categoryname;
   });
 
